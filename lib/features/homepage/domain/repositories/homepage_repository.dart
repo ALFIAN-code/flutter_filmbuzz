@@ -1,26 +1,15 @@
+import 'package:filmbuzz/features/detail_movie/data/models/detail_movie_model.dart';
+import 'package:filmbuzz/features/homepage/data/datasources/remote_home_datasource.dart';
 import 'package:filmbuzz/public/model/movie_model.dart';
-import 'package:filmbuzz/features/homepage/data/datasources/home_api.dart';
 
-class HomepageRepository {
-  final HomeApi api = HomeApi();
+abstract class HomepageRepository {
+  Future<MovieModel> getTrending();
 
-  getTranding() async {
-    return await api.getTranding();
-  }
+  Future<MovieModel> getPopular(String page);
 
-  getPopular(String page) async {
-    return await api.getPopular(page);
-  }
+  Future<MovieModel> getTopRated(String page);
 
-  getTopRated(String page) async {
-    return await api.getTopRated(page);
-  }
+  Future<MovieModel> getUpcoming(String page);
 
-  getUpcoming(String page) async {
-    return await api.getUpcoming(page);
-  }
-
-  getNowPlaying(String page) async {
-    return await api.getNowPlaying(page);
-  }
+  Future<MovieModel> getNowPlaying(String page);
 }

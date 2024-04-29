@@ -2,14 +2,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmbuzz/public/model/movie_model.dart';
 import 'package:filmbuzz/public/style.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 
 import '../../../../public/features/genre/domain/repository/get_genre.dart';
 
 class MyCarouserlSlider extends StatelessWidget {
   const MyCarouserlSlider({super.key, required this.items});
 
-  final List<Results> items;
+  final List<ListMovie> items;
 
   @override
   Widget build(BuildContext context) {

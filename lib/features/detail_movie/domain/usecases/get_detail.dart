@@ -5,7 +5,7 @@ class GetDetail {
   final DetailMovieRepo detailMovieRepo;
   const GetDetail(this.detailMovieRepo);
 
-  Future<MovieDetailsModel> get(int id, Function(String) onError) async {
+  Future<MovieDetailsModel> get(int id) async {
     return await detailMovieRepo.getMovieById(id);
   }
 }

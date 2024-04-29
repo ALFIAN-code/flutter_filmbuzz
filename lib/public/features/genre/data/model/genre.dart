@@ -5,9 +5,8 @@ class Genres {
   Genres({this.id, this.name});
 
   Genres.fromJson(Map<String, dynamic> json) {
-    var data = json['genres'];
-    id = data['id'];
-    name = data['name'];
+    id = json['id'];
+    name = json['name'];
   }
 
   Map<String, dynamic> toJson() {

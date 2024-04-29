@@ -1,12 +1,10 @@
 import 'package:filmbuzz/public/model/movie_model.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-class HomeApi {
+class RemoteHomeDatasource {
   final Dio dio = Dio();
 
-  HomeApi() {
+  RemoteHomeDatasource() {
     dio.options.baseUrl = 'https://api.themoviedb.org/3';
     dio.options.headers['accept'] = 'application/json';
     dio.options.queryParameters = {
@@ -14,13 +12,9 @@ class HomeApi {
     };
   }
 
-  Future<MovieModel> getTranding() async {
-    try {
-      final response = await dio.get('/trending/movie/week');
-      return MovieModel.fromJson(response.data);
-    } on DioException catch (e) {
-      throw e.message!;
-    }
+  Future<MovieModel> getTrending() async {
+    final response = await dio.get('/trending/movie/week');
+    return MovieModel.fromJson(response.data);
   }
 
   Future<MovieModel> getPopular(String page) async {
@@ -41,7 +35,7 @@ class HomeApi {
           await dio.get('/movie/top_rated', queryParameters: {'page': page});
       return MovieModel.fromJson(response.data);
     } on DioException catch (e) {
-      throw e.error!;
+      throw e.message!;
     }
   }
 
@@ -51,7 +45,7 @@ class HomeApi {
           await dio.get('/movie/upcoming', queryParameters: {'page': page});
       return MovieModel.fromJson(response.data);
     } on DioException catch (e) {
-      throw e.error!;
+      throw e.message!;
     }
   }
 
@@ -61,7 +55,7 @@ class HomeApi {
           await dio.get('/movie/now_playing', queryParameters: {'page': page});
       return MovieModel.fromJson(response.data);
     } on DioException catch (e) {
-      throw e.error!;
+      throw e.message!;
     }
   }
 }

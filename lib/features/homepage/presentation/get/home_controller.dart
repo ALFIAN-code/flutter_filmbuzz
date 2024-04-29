@@ -1,20 +1,23 @@
+import 'package:filmbuzz/features/homepage/data/datasources/remote_home_datasource.dart';
+import 'package:filmbuzz/features/homepage/data/repository/home_implement.dart';
 import 'package:filmbuzz/features/homepage/domain/repositories/homepage_repository.dart';
+import 'package:filmbuzz/features/homepage/domain/usecases/get_home_movie.dart';
 import 'package:filmbuzz/public/model/movie_model.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   HomeController();
 
-  final trending = Rx<List<Results>>([]);
-  final popularMovie = Rx<List<Results>>([]);
-  final topRatedMovie = Rx<List<Results>>([]);
-  final upcomingMovie = Rx<List<Results>>([]);
-  final nowPlayingMovie = Rx<List<Results>>([]);
+  final trending = Rx<List<ListMovie>>([]);
+  final popularMovie = Rx<List<ListMovie>>([]);
+  final topRatedMovie = Rx<List<ListMovie>>([]);
+  final upcomingMovie = Rx<List<ListMovie>>([]);
+  final nowPlayingMovie = Rx<List<ListMovie>>([]);
   final isLoading = false.obs;
-  final _getMovie = HomepageRepository();
+  final _getMovie = GetMovie(HomePageImplement(RemoteHomeDatasource()));
 
-  List<Results> trendingSlideList() {
-    late var trendingSlide = RxList<Results>([]);
+  List<ListMovie> trendingSlideList() {
+    late var trendingSlide = RxList<ListMovie>([]);
     for (var i = 0; i < 5; i++) {
       trendingSlide.add(trending.value[i]);
     }
@@ -24,8 +27,8 @@ class HomeController extends GetxController {
   fetchTrending() async {
     isLoading(true);
     try {
-      final MovieModel movie = await _getMovie.getTranding();
-      trending.value = movie.results!;
+      final MovieModel movie = await _getMovie.getTrending();
+      trending.value = movie.listMovie!;
     } finally {
       isLoading(false);
     }
@@ -35,7 +38,7 @@ class HomeController extends GetxController {
     isLoading(true);
     try {
       final movie = await _getMovie.getPopular(page.toString());
-      popularMovie.value = movie.results!;
+      popularMovie.value = movie.listMovie!;
     } finally {
       isLoading(false);
     }
@@ -45,7 +48,7 @@ class HomeController extends GetxController {
     isLoading(true);
     try {
       final movie = await _getMovie.getTopRated(page.toString());
-      topRatedMovie.value = movie.results!;
+      topRatedMovie.value = movie.listMovie!;
     } finally {
       isLoading(false);
     }
@@ -55,7 +58,7 @@ class HomeController extends GetxController {
     isLoading(true);
     try {
       final movie = await _getMovie.getNowPlaying(page.toString());
-      nowPlayingMovie.value = movie.results!;
+      nowPlayingMovie.value = movie.listMovie!;
     } finally {
       isLoading(false);
     }
@@ -65,7 +68,7 @@ class HomeController extends GetxController {
     isLoading(true);
     try {
       final movie = await _getMovie.getUpcoming(page.toString());
-      upcomingMovie.value = movie.results!;
+      upcomingMovie.value = movie.listMovie!;
     } finally {
       isLoading(false);
     }

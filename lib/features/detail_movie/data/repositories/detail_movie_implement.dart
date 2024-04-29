@@ -10,14 +10,11 @@ class DetailMovieImplement implements DetailMovieRepo {
   DetailMovieImplement(this.remoteData);
 
   @override
-  Future<MovieDetailsModel> getMovieById(
-    int id) async {
+  Future<MovieDetailsModel> getMovieById(int id) async {
     try {
       return remoteData.getMovieById(id);
-    } on DioException catch (e) {
-      // onError();
-      // return MovieDetailsModel();
-      throw e.message!;
+    }  catch (e) {
+      rethrow;
     }
   }
 }

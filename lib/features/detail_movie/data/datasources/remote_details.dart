@@ -17,7 +17,7 @@ class DetailsRemoteData implements DetailMovieRepo {
   Future<MovieDetailsModel> getMovieById(int id) async {
     try {
       final response =
-          await dio.get('/movie/$id', queryParameters: {'page': 'en-US'});
+          await dio.get('/movie/$id', queryParameters: {'language': 'en-US'});
       return MovieDetailsModel.fromJson(response.data);
     } on DioException catch (e) {
       throw e.message!;
