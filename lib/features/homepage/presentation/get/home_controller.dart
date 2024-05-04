@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:filmbuzz/features/homepage/data/datasources/remote_home_datasource.dart';
 import 'package:filmbuzz/features/homepage/data/repository/home_implement.dart';
-import 'package:filmbuzz/features/homepage/domain/repositories/homepage_repository.dart';
 import 'package:filmbuzz/features/homepage/domain/usecases/get_home_movie.dart';
 import 'package:filmbuzz/public/model/movie_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
+import 'package:palette_generator/palette_generator.dart';
 
 class HomeController extends GetxController {
   HomeController();
@@ -14,14 +18,20 @@ class HomeController extends GetxController {
   final upcomingMovie = Rx<List<ListMovie>>([]);
   final nowPlayingMovie = Rx<List<ListMovie>>([]);
   final isLoading = false.obs;
+
+  RxInt activeSlideIndex = 0.obs;
+  var currentSliderColor = Colors.transparent.obs;
+
   final _getMovie = GetMovie(HomePageImplement(RemoteHomeDatasource()));
 
-  List<ListMovie> trendingSlideList() {
-    late var trendingSlide = RxList<ListMovie>([]);
-    for (var i = 0; i < 5; i++) {
-      trendingSlide.add(trending.value[i]);
-    }
-    return trendingSlide;
+  Future<void> getColorFromImage(String image) async {
+    // Timer.periodic(Duration(seconds: 2), (timer) {
+
+    // });
+    final PaletteGenerator paletteGenerator =
+        await PaletteGenerator.fromImageProvider(NetworkImage(image));
+
+    currentSliderColor.value = paletteGenerator.vibrantColor!.color;
   }
 
   fetchTrending() async {

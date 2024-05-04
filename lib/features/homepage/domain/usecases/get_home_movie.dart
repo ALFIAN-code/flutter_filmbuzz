@@ -7,22 +7,42 @@ class GetMovie {
   GetMovie(this.repository);
 
   Future<MovieModel> getPopular(String page) async {
-    return await repository.getPopular(page);
+    try {
+      return await repository.getPopular(page);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<MovieModel> getNowPlaying(String page) async {
-    return await repository.getNowPlaying(page);
+    try {
+      return await repository.getNowPlaying(page);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<MovieModel> getTopRated(String page) async {
-    return await repository.getTopRated(page);
+    try {
+      return await repository.getTopRated(page);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<MovieModel> getUpcoming(String page) async {
-    return await repository.getUpcoming(page);
+    try {
+      return await repository.getUpcoming(page);
+    } catch (e) {
+      rethrow;
+    }
   }
 
   Future<MovieModel> getTrending() async {
-    return await repository.getTrending();
+    try {
+      return await repository.getTrending();
+    } catch (e) {
+      rethrow;
+    }
   }
 }

@@ -1,5 +1,4 @@
-import 'package:filmbuzz/features/detail_movie/data/models/detail_movie_model.dart';
-import 'package:filmbuzz/features/homepage/data/datasources/remote_home_datasource.dart';
+
 import 'package:filmbuzz/public/model/movie_model.dart';
 
 abstract class HomepageRepository {

@@ -5,16 +5,19 @@ import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
 
 import '../../../../public/features/genre/domain/repository/get_genre.dart';
+import '../get/home_controller.dart';
 
 class MyCarouserlSlider extends StatelessWidget {
-  const MyCarouserlSlider({super.key, required this.items});
+  MyCarouserlSlider(
+      {super.key, required this.items, required this.homecontroller});
 
   final List<ListMovie> items;
-
+  HomeController homecontroller;
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
         items: items.map((i) {
+          
           List<String> genreList = GetGenre.getFromListId(i.genreIds!);
           return Builder(
             builder: (BuildContext context) {
@@ -106,6 +109,7 @@ class MyCarouserlSlider extends StatelessWidget {
               );
             },
           );
+          
         }).toList(),
         options: CarouselOptions(
             autoPlay: true,
