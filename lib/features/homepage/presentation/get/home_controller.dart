@@ -6,18 +6,17 @@ import 'package:filmbuzz/features/homepage/domain/usecases/get_home_movie.dart';
 import 'package:filmbuzz/public/model/movie_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:palette_generator/palette_generator.dart';
 
 class HomeController extends GetxController {
   HomeController();
 
-  final trending = Rx<List<ListMovie>>([]);
-  final popularMovie = Rx<List<ListMovie>>([]);
-  final topRatedMovie = Rx<List<ListMovie>>([]);
-  final upcomingMovie = Rx<List<ListMovie>>([]);
-  final nowPlayingMovie = Rx<List<ListMovie>>([]);
-  final isLoading = false.obs;
+  var trending = <ListMovie>[].obs;
+  var popularMovie = <ListMovie>[].obs;
+  var topRatedMovie = <ListMovie>[].obs;
+  var upcomingMovie = <ListMovie>[].obs;
+  var nowPlayingMovie = <ListMovie>[].obs;
+  var isLoading = false.obs;
 
   RxInt activeSlideIndex = 0.obs;
   var currentSliderColor = Colors.transparent.obs;
@@ -25,26 +24,27 @@ class HomeController extends GetxController {
   final _getMovie = GetMovie(HomePageImplement(RemoteHomeDatasource()));
 
   Future<void> getColorFromImage(String image) async {
-    // Timer.periodic(Duration(seconds: 2), (timer) {
-
-    // });
     final PaletteGenerator paletteGenerator =
         await PaletteGenerator.fromImageProvider(NetworkImage(image));
 
-    currentSliderColor.value = paletteGenerator.vibrantColor!.color;
+    currentSliderColor.value = paletteGenerator.vibrantColor != null
+        ? paletteGenerator.vibrantColor!.color
+        : paletteGenerator.dominantColor!.color;
   }
 
-  fetchTrending() async {
+  Future<void> fetchTrending() async {
     isLoading(true);
     try {
       final MovieModel movie = await _getMovie.getTrending();
       trending.value = movie.listMovie!;
+      // trending(movie.listMovie!);
     } finally {
       isLoading(false);
     }
+    update();
   }
 
-  fetchPopularMovie(int page) async {
+  Future<void> fetchPopularMovie(int page) async {
     isLoading(true);
     try {
       final movie = await _getMovie.getPopular(page.toString());
@@ -52,9 +52,10 @@ class HomeController extends GetxController {
     } finally {
       isLoading(false);
     }
+    update();
   }
 
-  fetchTopRatedMovie(int page) async {
+  Future<void> fetchTopRatedMovie(int page) async {
     isLoading(true);
     try {
       final movie = await _getMovie.getTopRated(page.toString());
@@ -64,7 +65,7 @@ class HomeController extends GetxController {
     }
   }
 
-  fetchNowPlayingMovie(int page) async {
+  Future<void> fetchNowPlayingMovie(int page) async {
     isLoading(true);
     try {
       final movie = await _getMovie.getNowPlaying(page.toString());
@@ -74,7 +75,7 @@ class HomeController extends GetxController {
     }
   }
 
-  fetchUpcomingMovie(int page) async {
+  Future<void> fetchUpcomingMovie(int page) async {
     isLoading(true);
     try {
       final movie = await _getMovie.getUpcoming(page.toString());

@@ -1,11 +1,11 @@
-import 'dart:async';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmbuzz/features/homepage/presentation/get/home_controller.dart';
 import 'package:filmbuzz/features/homepage/presentation/widgets/carousel_sllider.dart';
+import 'package:filmbuzz/features/homepage/presentation/widgets/display_movie.dart';
 import 'package:filmbuzz/features/homepage/presentation/widgets/search.dart';
 import 'package:filmbuzz/public/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -13,39 +13,37 @@ class HomePage extends StatelessWidget {
   HomePage({super.key});
 
   final CarouselController carouselController = CarouselController();
-
   final HomeController controller = Get.put(HomeController());
 
   var imageColor = Colors.transparent;
 
   @override
   Widget build(BuildContext context) {
-    // currentImageColor();
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
             child: Stack(children: [
-          GetX(
-            init: HomeController(),
-            builder: (controller) {
-              return Align(
-                alignment: const Alignment(0, 0),
-                child: Container(
-                  height: 1000,
-                  width: 1000,
-                  decoration:
-                      BoxDecoration(color: controller.currentSliderColor.value
-                          // gradient: RadialGradient(
-                          //     center: Alignment.center,
-                          //     colors: [
-                          //   controller.currentSliderColor.value,
-                          //   Colors.transparent
-                          // ])
-                          ),
-                ),
-              );
-            },
+          Align(
+            alignment: const Alignment(0, 0),
+            child: Obx(
+              () => Container(
+                margin: const EdgeInsets.only(top: 70),
+                height: 500,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: controller.currentSliderColor.value.withOpacity(0.8),
+                    // shape: BoxShape.rectangle,
+                    gradient: RadialGradient(
+                        radius: 0.75,
+                        center: Alignment.center,
+                        colors: [
+                          controller.currentSliderColor.value.withOpacity(0.7),
+                          Colors.transparent
+                        ])),
+              ),
+            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,58 +51,84 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        HorintalPadding(
-                          child: Text(
+              HorintalPadding(
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
                             "Hello There",
                             style: textStyle22Bold,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        HorintalPadding(
-                          child: Text(
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Text(
                             "Welcome to Movie World!",
                             style: textStyle14Regular,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                      ],
+                          const SizedBox(
+                            height: 20,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  SvgPicture.asset(
-                    'lib/assets/profile/profile1.svg',
-                    height: 50,
-                    fit: BoxFit.cover,
-                  )
-                ],
+                    SvgPicture.asset(
+                      'lib/assets/profile/profile1.svg',
+                      height: 50,
+                      fit: BoxFit.cover,
+                    )
+                  ],
+                ),
               ),
               const HorintalPadding(child: SearchCustom()),
               const SizedBox(
                 height: 20,
               ),
-              GetX<HomeController>(
-                init: HomeController(),
-                initState: (state) => state.controller!.fetchTrending(),
-                builder: (_) => MyCarouserlSlider(
+              HorintalPadding(
+                  child: Text(
+                'Popular',
+                style: textStyle18Bold,
+              )),
+              const SizedBox(
+                height: 10,
+              ),
+              Obx(
+                () => MyCarouserlSlider(
                   homecontroller: controller,
-                  items: _.trending.value,
+                  items: controller.trending.value,
                 ),
               ),
+              const SizedBox(
+                height: 30,
+              ),
+              HorintalPadding(
+                  child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Now Playing",
+                        style: textStyle16Bold,
+                      ),
+                      Text(
+                        "see all",
+                        style: textStyle10Regular.copyWith(
+                            color: Colors.white.withOpacity(0.6),
+                            decoration: TextDecoration.underline),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  // const DisplayMovie()
+                ],
+              )),
             ],
-          ),
-          Container(
-            height: 50,
-            width: 50,
-            color: Colors.amber,
           ),
         ])),
       ),

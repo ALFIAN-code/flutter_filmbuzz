@@ -15,7 +15,7 @@ class SearchCustom extends StatelessWidget {
         children: [
           Container(
             height: 47,
-            width: 280,
+            width: 290,
             padding: const EdgeInsets.only(left: 20),
             decoration: BoxDecoration(
                 color: primaryColor, borderRadius: BorderRadius.circular(20)),
