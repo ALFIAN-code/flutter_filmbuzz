@@ -1,6 +1,8 @@
 import 'package:filmbuzz/features/homepage/presentation/get/home_controller.dart';
+import 'package:filmbuzz/features/homepage/presentation/pages/homepage.dart';
 import 'package:filmbuzz/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -10,10 +12,9 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   HomeController controller = Get.put(HomeController());
-
-  getData() {}
 
   @override
   void initState() {
@@ -24,17 +25,40 @@ class _SplashScreenState extends State<SplashScreen> {
     controller.fetchTopRatedMovie(1);
     controller.fetchUpcomingMovie(1);
     controller.fetchNowPlayingMovie(1);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+  }
 
-    Future.delayed(const Duration(seconds: 4), () {
-      Get.offAllNamed(Routes.HOME);
-    });
+  @override
+  void dispose() {
+    super.dispose();
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        body: Center(
-      child: Text('Splash Screen'),
-    ));
+    return Obx(() {
+      if (controller.nowPlayingMovie.isNotEmpty ||
+          controller.popularMovie.isNotEmpty ||
+          controller.topRatedMovie.isNotEmpty ||
+          controller.trending.isNotEmpty ||
+          controller.upcomingMovie.isNotEmpty) {
+        Future.delayed(const Duration(seconds: 1), () {
+          Get.offAllNamed(Routes.HOME);
+        });
+        // Get.offAllNamed(Routes.HOME);
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      } else {
+        return const Scaffold(
+          body: Center(
+            child: CircularProgressIndicator(),
+          ),
+        );
+      }
+    });
   }
 }

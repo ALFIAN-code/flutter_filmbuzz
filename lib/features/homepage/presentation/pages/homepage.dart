@@ -5,7 +5,6 @@ import 'package:filmbuzz/features/homepage/presentation/widgets/display_movie.da
 import 'package:filmbuzz/features/homepage/presentation/widgets/search.dart';
 import 'package:filmbuzz/public/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -34,7 +33,6 @@ class HomePage extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     color: controller.currentSliderColor.value.withOpacity(0.8),
-                    // shape: BoxShape.rectangle,
                     gradient: RadialGradient(
                         radius: 0.75,
                         center: Alignment.center,
@@ -125,7 +123,12 @@ class HomePage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  // const DisplayMovie()
+                  SizedBox(
+                    height: 700,
+                    child: DisplayMovie(
+                      items: controller.nowPlayingMovie,
+                    ),
+                  )
                 ],
               )),
             ],
