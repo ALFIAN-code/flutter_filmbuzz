@@ -124,11 +124,98 @@ class HomePage extends StatelessWidget {
                     height: 20,
                   ),
                   SizedBox(
-                    height: 700,
+                    height: 770,
                     child: DisplayMovie(
                       items: controller.nowPlayingMovie,
                     ),
-                  )
+                  ),
+
+                  //======== TOP RATED ========
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Top Rated",
+                        style: textStyle16Bold,
+                      ),
+                      Text(
+                        "see all",
+                        style: textStyle10Regular.copyWith(
+                            color: Colors.white.withOpacity(0.6),
+                            decoration: TextDecoration.underline),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 770,
+                    child: DisplayMovie(
+                      items: controller.topRatedMovie,
+                    ),
+                  ),
+
+                  //========  POPULAR ========
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Popular",
+                        style: textStyle16Bold,
+                      ),
+                      Text(
+                        "see all",
+                        style: textStyle10Regular.copyWith(
+                            color: Colors.white.withOpacity(0.6),
+                            decoration: TextDecoration.underline),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 770,
+                    child: DisplayMovie(
+                      items: controller.popularMovie,
+                    ),
+                  ),
+
+                  //========  UPCOMING ========
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Upcoming",
+                        style: textStyle16Bold,
+                      ),
+                      Text(
+                        "see all",
+                        style: textStyle10Regular.copyWith(
+                            color: Colors.white.withOpacity(0.6),
+                            decoration: TextDecoration.underline),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: 770,
+                    child: DisplayMovie(
+                      items: controller.upcomingMovie,
+                    ),
+                  ),
                 ],
               )),
             ],

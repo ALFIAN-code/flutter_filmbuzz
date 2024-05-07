@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmbuzz/public/model/movie_model.dart';
 import 'package:filmbuzz/public/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 // import 'package:get/get.dart';
 
 import '../../../../public/features/genre/domain/repository/get_genre.dart';
@@ -54,59 +55,58 @@ class MyCarouserlSlider extends StatelessWidget {
                 ),
               ),
             ),
-            Align(
-                alignment: Alignment.bottomLeft,
-                child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30.0, vertical: 20.0),
-                    child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: 200,
-                            child: Text(
-                              items[index].title!,
-                              style: textStyle16Bold,
+            Positioned(
+              bottom: 20,
+              left: 30,
+              child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      width: 200,
+                      child: Text(
+                        items[index].title!,
+                        style: textStyle16Bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 2,
+                    ),
+                    Text(
+                      genreList.join(', '),
+                      style: textStyle10Regular,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    SizedBox(
+                        width: 200,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const Icon(
+                              Icons.star_rate_rounded,
+                              color: Colors.yellow,
+                              size: 20,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 2,
-                          ),
-                          Text(
-                            genreList.join(', '),
-                            style: textStyle10Regular,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          SizedBox(
-                              width: 200,
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  const Icon(
-                                    Icons.star_rate_rounded,
-                                    color: Colors.yellow,
-                                    size: 20,
-                                  ),
-                                  const SizedBox(
-                                    width: 3,
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 2.6),
-                                    child: Text(
-                                      '${items[index].voteAverage?.toStringAsFixed(1)}',
-                                      style: textStyle12Bold,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ],
-                              ))
-                        ])))
+                            const SizedBox(
+                              width: 3,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 2.6),
+                              child: Text(
+                                '${items[index].voteAverage?.toStringAsFixed(1)}',
+                                style: textStyle12Bold,
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
+                        ))
+                  ]),
+            )
           ]);
         },
         options: CarouselOptions(
