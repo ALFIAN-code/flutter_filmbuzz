@@ -14,7 +14,7 @@ class DisplayMovie extends StatelessWidget {
     return GridView(
       physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          childAspectRatio: 0.7,
+          childAspectRatio: 0.67,
           crossAxisCount: 2,
           mainAxisSpacing: 20,
           crossAxisSpacing: 10),
@@ -22,8 +22,6 @@ class DisplayMovie extends StatelessWidget {
         return Container(
           clipBehavior: Clip.hardEdge,
           decoration: BoxDecoration(
-              // color: Colors.purple,
-
               borderRadius: BorderRadius.circular(20)),
           child: Stack(
             children: [

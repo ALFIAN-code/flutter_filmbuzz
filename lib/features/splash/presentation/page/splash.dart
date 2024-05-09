@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
           controller.trending.isNotEmpty ||
           controller.upcomingMovie.isNotEmpty) {
         Future.delayed(const Duration(seconds: 1), () {
-          Get.offAllNamed(Routes.HOME);
+          Get.offAllNamed(Routes.PAGE_SWITCHER);
         });
         // Get.offAllNamed(Routes.HOME);
         return const Scaffold(

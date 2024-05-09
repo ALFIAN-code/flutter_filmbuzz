@@ -26,7 +26,6 @@ class HomeController extends GetxController {
   Future<void> getColorFromImage(String image) async {
     final PaletteGenerator paletteGenerator =
         await PaletteGenerator.fromImageProvider(NetworkImage(image));
-
     currentSliderColor.value = paletteGenerator.vibrantColor != null
         ? paletteGenerator.vibrantColor!.color
         : paletteGenerator.dominantColor!.color;
@@ -37,11 +36,9 @@ class HomeController extends GetxController {
     try {
       final MovieModel movie = await _getMovie.getTrending();
       trending.value = movie.listMovie!;
-      // trending(movie.listMovie!);
     } finally {
       isLoading(false);
     }
-    update();
   }
 
   Future<void> fetchPopularMovie(int page) async {
@@ -52,7 +49,6 @@ class HomeController extends GetxController {
     } finally {
       isLoading(false);
     }
-    update();
   }
 
   Future<void> fetchTopRatedMovie(int page) async {
