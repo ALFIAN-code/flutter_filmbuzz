@@ -8,7 +8,7 @@ class DisplayMovie extends StatelessWidget {
   DisplayMovie({super.key, required this.items});
 
   List<ListMovie> items;
-
+ 
   @override
   Widget build(BuildContext context) {
     return GridView(

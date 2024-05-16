@@ -1,9 +1,10 @@
 import 'package:filmbuzz/features/homepage/presentation/get/home_controller.dart';
-import 'package:filmbuzz/features/homepage/presentation/pages/homepage.dart';
 import 'package:filmbuzz/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+
+import '../../../../public/utils/get_connectivity.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -17,9 +18,8 @@ class _SplashScreenState extends State<SplashScreen>
   HomeController controller = Get.put(HomeController());
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
-    // getData();
     controller.fetchTrending();
     controller.fetchPopularMovie(1);
     controller.fetchTopRatedMovie(1);

@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmbuzz/public/model/movie_model.dart';
 import 'package:filmbuzz/public/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 // import 'package:get/get.dart';
 
 import '../../../../public/features/genre/domain/repository/get_genre.dart';

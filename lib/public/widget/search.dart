@@ -1,7 +1,7 @@
 // import 'package:filmbuzz/public/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import '../../../../public/style.dart';
+import '../style.dart';
 
 class SearchCustom extends StatelessWidget {
   const SearchCustom({super.key, this.autoFocus = false});

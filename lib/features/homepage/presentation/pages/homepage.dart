@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmbuzz/features/homepage/presentation/get/home_controller.dart';
 import 'package:filmbuzz/features/homepage/presentation/widgets/carousel_sllider.dart';
 import 'package:filmbuzz/features/homepage/presentation/widgets/display_movie.dart';
-import 'package:filmbuzz/features/homepage/presentation/widgets/search.dart';
+import 'package:filmbuzz/public/widget/search.dart';
 import 'package:filmbuzz/public/style.dart';
 import 'package:filmbuzz/public/features/navbar/presentation/pages/navbar.dart';
 import 'package:flutter/material.dart';
@@ -139,7 +139,7 @@ class HomePage extends StatelessWidget {
 
                       //======== TOP RATED ========
                       const SizedBox(
-                        height: 30,
+                        height: 50,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -168,7 +168,7 @@ class HomePage extends StatelessWidget {
 
                       //========  POPULAR ========
                       const SizedBox(
-                        height: 30,
+                        height: 50,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -197,7 +197,7 @@ class HomePage extends StatelessWidget {
 
                       //========  UPCOMING ========
                       const SizedBox(
-                        height: 30,
+                        height: 50,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

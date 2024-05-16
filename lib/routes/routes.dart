@@ -4,7 +4,6 @@ import 'package:filmbuzz/features/setting/presentation/pages/setting_page.dart';
 import 'package:filmbuzz/features/splash/presentation/page/splash.dart';
 import 'package:filmbuzz/features/watchlist/presentation/pages/watchlist_page.dart';
 import 'package:filmbuzz/public/features/navbar/presentation/pages/page_switcher.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AppPages {

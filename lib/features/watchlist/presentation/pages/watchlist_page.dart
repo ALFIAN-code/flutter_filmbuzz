@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../public/features/navbar/presentation/pages/navbar.dart';
-
 class WatchlistPage extends StatelessWidget {
   const WatchlistPage({super.key});
 
