@@ -27,7 +27,7 @@ class HomeController extends GetxController {
         await PaletteGenerator.fromImageProvider(NetworkImage(image));
     currentSliderColor.value = paletteGenerator.vibrantColor != null
         ? paletteGenerator.vibrantColor!.color
-        : paletteGenerator.dominantColor!.color;
+        : paletteGenerator.mutedColor!.color;
   }
 
   Future<void> fetchTrending() async {

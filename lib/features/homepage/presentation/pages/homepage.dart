@@ -7,6 +7,7 @@ import 'package:filmbuzz/public/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lottie/lottie.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -105,7 +106,10 @@ class HomePage extends StatelessWidget {
                               controller.topRatedMovie.isEmpty ||
                               controller.trending.isEmpty ||
                               controller.upcomingMovie.isEmpty)
-                          ? const Center(child: CircularProgressIndicator())
+                          ? const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 200),
+                              child: Center(child: CircularProgressIndicator()),
+                            )
                           : Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [

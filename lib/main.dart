@@ -1,6 +1,7 @@
 // import 'package:filmbuzz/features/homepage/presentation/pages/homepage.dart';
 import 'package:filmbuzz/features/homepage/presentation/pages/homepage.dart';
-import 'package:filmbuzz/features/splash/presentation/page/splash.dart';
+import 'package:filmbuzz/public/features/navbar/presentation/pages/page_switcher.dart';
+// import 'package:filmbuzz/features/splash/presentation/page/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,10 +22,10 @@ class MyApp extends StatelessWidget {
       if (networkController.isConnected.value) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.SPLASH,
+          initialRoute: Routes.HOME,
           defaultTransition: Transition.fade,
           getPages: AppPages.pages,
-          home: HomePage(),
+          home: PageSwitcher(),
         );
       } else {
         return const MaterialApp(
