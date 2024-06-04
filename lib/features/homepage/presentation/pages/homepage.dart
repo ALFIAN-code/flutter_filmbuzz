@@ -4,7 +4,6 @@ import 'package:filmbuzz/features/homepage/presentation/widgets/carousel_sllider
 import 'package:filmbuzz/features/homepage/presentation/widgets/display_movie.dart';
 import 'package:filmbuzz/public/widget/search.dart';
 import 'package:filmbuzz/public/style.dart';
-import 'package:filmbuzz/public/features/navbar/presentation/pages/navbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';

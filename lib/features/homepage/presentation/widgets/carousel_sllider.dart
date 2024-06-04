@@ -62,7 +62,7 @@ class MyCarouserlSlider extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      width: 200,
+                      width: 230,
                       child: Text(
                         items[index].title!,
                         style: textStyle16Bold,

@@ -2,10 +2,10 @@ import 'package:dio/dio.dart';
 
 import '../../../../public/model/movie_model.dart';
 
-class DiscoverRemoteDataSource {
+class RemoteDiscoverDatasource {
   final Dio dio = Dio();
 
-  DiscoverRemoteDataSource() {
+  RemoteDiscoverDatasource() {
     dio.options.baseUrl = 'https://api.themoviedb.org/3';
     dio.options.headers['accept'] = 'application/json';
     dio.options.queryParameters = {

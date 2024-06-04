@@ -34,8 +34,6 @@ class ListMovie{
   bool? video;
   double? voteAverage;
   int? voteCount;
-  // int? page;
-  // int? totalPages;
 
   ListMovie(
       {this.adult,
