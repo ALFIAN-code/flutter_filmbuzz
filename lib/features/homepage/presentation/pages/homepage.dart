@@ -5,7 +5,6 @@ import 'package:filmbuzz/features/homepage/presentation/widgets/display_movie.da
 import 'package:filmbuzz/public/widget/search.dart';
 import 'package:filmbuzz/public/style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -15,13 +14,18 @@ class HomePage extends StatelessWidget {
   final CarouselController carouselController = CarouselController();
   final HomeController controller = Get.put(HomeController());
 
-  var imageColor = Colors.transparent;
+  void getMovie() {
+    controller.fetchTrending();
+    controller.fetchPopularMovie(1);
+    controller.fetchTopRatedMovie(1);
+    controller.fetchUpcomingMovie(1);
+    controller.fetchNowPlayingMovie(1);
+  }
 
   @override
   Widget build(BuildContext context) {
     // double deviceHeight = MediaQuery.of(context).size.height;
     // int navbarHeight = 70;
-
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(
@@ -90,140 +94,171 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   const HorintalPadding(child: SearchCustom()),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  HorintalPadding(
-                      child: Text(
-                    'Popular',
-                    style: textStyle18Bold,
-                  )),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  MyCarouserlSlider(
-                    homecontroller: controller,
-                    items: controller.trending,
-                  ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  HorintalPadding(
-                      child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Now Playing",
-                            style: textStyle18Bold,
-                          ),
-                          Text(
-                            "see all",
-                            style: textStyle10Regular.copyWith(
-                                color: Colors.white.withOpacity(0.6),
-                                decoration: TextDecoration.underline),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        height: 770,
-                        child: DisplayMovie(
-                          items: controller.nowPlayingMovie,
-                        ),
-                      ),
 
-                      //======== TOP RATED ========
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Top Rated",
-                            style: textStyle18Bold,
-                          ),
-                          Text(
-                            "see all",
-                            style: textStyle10Regular.copyWith(
-                                color: Colors.white.withOpacity(0.6),
-                                decoration: TextDecoration.underline),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        height: 770,
-                        child: DisplayMovie(
-                          items: controller.topRatedMovie,
-                        ),
-                      ),
+                  // =============== CONTENT ===================
+                  GetX<HomeController>(
+                    init: controller,
+                    initState: (state) => getMovie(),
+                    builder: (_) {
+                      return (controller.nowPlayingMovie.isEmpty ||
+                              controller.popularMovie.isEmpty ||
+                              controller.topRatedMovie.isEmpty ||
+                              controller.trending.isEmpty ||
+                              controller.upcomingMovie.isEmpty)
+                          ? const Center(child: CircularProgressIndicator())
+                          : Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                HorintalPadding(
+                                    child: Text(
+                                  'Popular',
+                                  style: textStyle18Bold,
+                                )),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                MyCarouserlSlider(
+                                  homecontroller: controller,
+                                  items: controller.trending,
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                HorintalPadding(
+                                    child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Now Playing",
+                                          style: textStyle18Bold,
+                                        ),
+                                        Text(
+                                          "see all",
+                                          style: textStyle10Regular.copyWith(
+                                              color:
+                                                  Colors.white.withOpacity(0.6),
+                                              decoration:
+                                                  TextDecoration.underline),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    SizedBox(
+                                      height: 770,
+                                      child: DisplayMovie(
+                                        items: controller.nowPlayingMovie,
+                                      ),
+                                    ),
 
-                      //========  POPULAR ========
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Popular",
-                            style: textStyle18Bold,
-                          ),
-                          Text(
-                            "see all",
-                            style: textStyle10Regular.copyWith(
-                                color: Colors.white.withOpacity(0.6),
-                                decoration: TextDecoration.underline),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        height: 770,
-                        child: DisplayMovie(
-                          items: controller.popularMovie,
-                        ),
-                      ),
+                                    //======== TOP RATED ========
+                                    const SizedBox(
+                                      height: 50,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Top Rated",
+                                          style: textStyle18Bold,
+                                        ),
+                                        Text(
+                                          "see all",
+                                          style: textStyle10Regular.copyWith(
+                                              color:
+                                                  Colors.white.withOpacity(0.6),
+                                              decoration:
+                                                  TextDecoration.underline),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    SizedBox(
+                                      height: 770,
+                                      child: DisplayMovie(
+                                        items: controller.topRatedMovie,
+                                      ),
+                                    ),
 
-                      //========  UPCOMING ========
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Upcoming",
-                            style: textStyle18Bold,
-                          ),
-                          Text(
-                            "see all",
-                            style: textStyle10Regular.copyWith(
-                                color: Colors.white.withOpacity(0.6),
-                                decoration: TextDecoration.underline),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      SizedBox(
-                        height: 770,
-                        child: DisplayMovie(
-                          items: controller.upcomingMovie,
-                        ),
-                      ),
-                    ],
-                  )),
+                                    //========  POPULAR ========
+                                    const SizedBox(
+                                      height: 50,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Popular",
+                                          style: textStyle18Bold,
+                                        ),
+                                        Text(
+                                          "see all",
+                                          style: textStyle10Regular.copyWith(
+                                              color:
+                                                  Colors.white.withOpacity(0.6),
+                                              decoration:
+                                                  TextDecoration.underline),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    SizedBox(
+                                      height: 770,
+                                      child: DisplayMovie(
+                                        items: controller.popularMovie,
+                                      ),
+                                    ),
+
+                                    //========  UPCOMING ========
+                                    const SizedBox(
+                                      height: 50,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "Upcoming",
+                                          style: textStyle18Bold,
+                                        ),
+                                        Text(
+                                          "see all",
+                                          style: textStyle10Regular.copyWith(
+                                              color:
+                                                  Colors.white.withOpacity(0.6),
+                                              decoration:
+                                                  TextDecoration.underline),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 20,
+                                    ),
+                                    SizedBox(
+                                      height: 770,
+                                      child: DisplayMovie(
+                                        items: controller.upcomingMovie,
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                              ],
+                            );
+                    },
+                  )
                 ],
               ),
             ])),
@@ -232,6 +267,8 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+
+    // return ;
   }
 }
 
