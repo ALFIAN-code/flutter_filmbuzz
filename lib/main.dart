@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       if (networkController.isConnected.value) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.HOME,
+          initialRoute: Routes.PAGE_SWITCHER,
           defaultTransition: Transition.fade,
           getPages: AppPages.pages,
           home: PageSwitcher(),

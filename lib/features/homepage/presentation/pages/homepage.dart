@@ -7,7 +7,6 @@ import 'package:filmbuzz/public/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:lottie/lottie.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -87,7 +86,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                         SvgPicture.asset(
-                          'lib/assets/profile/profile1.svg',
+                          'lib/assets/profile/profile9.svg',
                           height: 50,
                           fit: BoxFit.cover,
                         )
