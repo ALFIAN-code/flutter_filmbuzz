@@ -14,17 +14,17 @@ class HomePageImplement implements HomepageRepository {
   }
 
   @override
-  Future<MovieModel> getPopular(String page)async {
+  Future<MovieModel> getPopular(String page) async {
     return await remoteHomeDatasource.getPopular(page);
   }
 
   @override
-  Future<MovieModel> getTopRated(String page) async{
+  Future<MovieModel> getTopRated(String page) async {
     return await remoteHomeDatasource.getTopRated(page);
   }
 
   @override
-  Future<MovieModel> getTrending() async{
+  Future<MovieModel> getTrending() async {
     return await remoteHomeDatasource.getTrending();
   }
 
@@ -32,5 +32,4 @@ class HomePageImplement implements HomepageRepository {
   Future<MovieModel> getUpcoming(String page) async {
     return await remoteHomeDatasource.getUpcoming(page);
   }
-
 }

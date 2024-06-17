@@ -5,7 +5,7 @@ class GetDiscoverMovie {
 
   GetDiscoverMovie(this.repository);
 
-  Future getDiscover(String page) async {
+  Future getDiscover(int page) async {
     try {
       return await repository.getDiscover(page);
     } catch (e) {
@@ -13,7 +13,7 @@ class GetDiscoverMovie {
     }
   }
 
-  Future getDiscoverTv(String page) async {
+  Future getDiscoverTv(int page) async {
     try {
       return await repository.getDiscoverTv(page);
     } catch (e) {

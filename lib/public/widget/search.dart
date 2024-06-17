@@ -18,7 +18,8 @@ class SearchCustom extends StatelessWidget {
             width: 290,
             padding: const EdgeInsets.only(left: 20),
             decoration: BoxDecoration(
-                color: primaryColor, borderRadius: BorderRadius.circular(20)),
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius: BorderRadius.circular(20)),
             child: TextField(
               autofocus: autoFocus,
               style: textStyle12Regular,
@@ -28,7 +29,10 @@ class SearchCustom extends StatelessWidget {
                   border: InputBorder.none,
                   hintText: "Search Something",
                   hintStyle: textStyle12Regular.copyWith(
-                      color: textColor.withOpacity(0.5))),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .inversePrimary
+                          .withOpacity(0.5))),
             ),
           ),
           Container(
@@ -36,7 +40,7 @@ class SearchCustom extends StatelessWidget {
             width: 47,
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: primaryColor,
+              color: Theme.of(context).colorScheme.primary,
               borderRadius: BorderRadius.circular(15),
             ),
             child: SvgPicture.asset(

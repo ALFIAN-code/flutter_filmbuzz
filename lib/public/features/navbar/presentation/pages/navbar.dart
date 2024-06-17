@@ -1,17 +1,14 @@
 import 'dart:ui';
 
-import 'package:filmbuzz/public/features/navbar/presentation/get/navbar_controller.dart';
 import 'package:filmbuzz/public/features/navbar/presentation/widget/navbar_item.dart';
 import 'package:filmbuzz/public/style.dart';
 import 'package:filmbuzz/routes/routes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 
 class MyNavbar extends StatelessWidget {
   const MyNavbar({super.key});
-  // final NavbarController controller = Get.put(NavbarController());
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +27,7 @@ class MyNavbar extends StatelessWidget {
             child: Container(),
           ),
           Container(
-            color: primaryColor.withOpacity(0.6),
+            color: Theme.of(context).colorScheme.primary.withOpacity(0.6),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -13,7 +13,7 @@ class DetailMovieImplement implements DetailMovieRepo {
   Future<MovieDetailsModel> getMovieById(int id) async {
     try {
       return remoteData.getMovieById(id);
-    }  catch (e) {
+    } catch (e) {
       rethrow;
     }
   }

@@ -1,12 +1,15 @@
 // import 'package:filmbuzz/features/homepage/presentation/pages/homepage.dart';
 import 'package:filmbuzz/features/homepage/presentation/pages/homepage.dart';
 import 'package:filmbuzz/public/features/navbar/presentation/pages/page_switcher.dart';
+import 'package:filmbuzz/public/style.dart';
 // import 'package:filmbuzz/features/splash/presentation/page/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'public/utils/get_connectivity.dart';
 import 'routes/routes.dart';
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() {
   runApp(MyApp());
@@ -21,6 +24,8 @@ class MyApp extends StatelessWidget {
     return Obx(() {
       if (networkController.isConnected.value) {
         return GetMaterialApp(
+          navigatorKey: navigatorKey,
+          theme: darkTheme,
           debugShowCheckedModeBanner: false,
           initialRoute: Routes.PAGE_SWITCHER,
           defaultTransition: Transition.fade,

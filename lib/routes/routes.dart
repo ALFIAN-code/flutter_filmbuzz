@@ -1,3 +1,4 @@
+import 'package:filmbuzz/features/detail_movie/presentation/pages/detail_page.dart';
 import 'package:filmbuzz/features/discover/presentation/pages/discover_page.dart';
 import 'package:filmbuzz/features/homepage/presentation/pages/homepage.dart';
 import 'package:filmbuzz/features/setting/presentation/pages/setting_page.dart';
@@ -7,8 +8,11 @@ import 'package:get/get.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: Routes.HOME, page: () => HomePage()),
-    // GetPage(name: Routes.SPLASH, page: () => const SplashScreen()),
+    GetPage(
+      name: Routes.HOME,
+      page: () => HomePage(),
+    ),
+    GetPage(name: Routes.MOVIE_DETAILS, page: () => const Details()),
     GetPage(name: Routes.WATCHLIST, page: () => const WatchlistPage()),
     GetPage(name: Routes.DISCOVER, page: () => const DiscoverPage()),
     GetPage(name: Routes.SETTINGS, page: () => const SettingPage()),

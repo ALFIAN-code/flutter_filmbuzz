@@ -7,12 +7,12 @@ class DiscoverImplement implements DiscoverRepository {
   DiscoverImplement(this.remoteDatasource);
 
   @override
-  Future<MovieModel> getDiscover(String page) {
-    return remoteDatasource.getDiscoverMovie(page);
+  Future<MovieModel> getDiscover(int page) {
+    return remoteDatasource.getDiscoverMovie(page.toString());
   }
 
   @override
-  Future<MovieModel> getDiscoverTv(String page) {
-    return remoteDatasource.getDiscoverTv(page);
+  Future<MovieModel> getDiscoverTv(int page) {
+    return remoteDatasource.getDiscoverTv(page.toString());
   }
 }

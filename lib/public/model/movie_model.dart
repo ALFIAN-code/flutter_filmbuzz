@@ -19,7 +19,7 @@ class MovieModel {
   }
 }
 
-class ListMovie{
+class ListMovie {
   bool? adult;
   String? backdropPath;
   List<int>? genreIds;

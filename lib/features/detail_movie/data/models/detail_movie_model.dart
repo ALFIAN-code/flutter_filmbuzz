@@ -1,9 +1,7 @@
-
 import 'package:filmbuzz/features/detail_movie/domain/entities/detail_movie.dart';
 
 import '../../../../public/features/genre/data/model/genre.dart';
 import '../../domain/entities/spoken_language.dart';
-
 
 class MovieDetailsModel extends MovieDetails {
   MovieDetailsModel(
@@ -73,8 +71,9 @@ class MovieDetailsModel extends MovieDetails {
   }
 }
 
-class BelongsToCollectionModel extends BelongsToCollection{
-  BelongsToCollectionModel({super.id, super.name, super.posterPath, super.backdropPath});
+class BelongsToCollectionModel extends BelongsToCollection {
+  BelongsToCollectionModel(
+      {super.id, super.name, super.posterPath, super.backdropPath});
 
   BelongsToCollectionModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -84,7 +83,7 @@ class BelongsToCollectionModel extends BelongsToCollection{
   }
 }
 
-class SpokenLanguagesModel extends SpokenLanguages{
+class SpokenLanguagesModel extends SpokenLanguages {
   SpokenLanguagesModel({super.englishName, super.iso6391, super.name});
   SpokenLanguagesModel.fromJson(Map<String, dynamic> json) {
     englishName = json['english_name'];

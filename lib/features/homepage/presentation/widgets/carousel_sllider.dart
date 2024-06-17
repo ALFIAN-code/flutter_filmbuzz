@@ -16,16 +16,12 @@ class MyCarouserlSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("items: $items");
     return CarouselSlider.builder(
         itemCount: items.length,
         itemBuilder: (context, index, realIndex) {
           List<String> genreList = GetGenre.getFromListId(
             items[index].genreIds!,
           );
-          print("index = $index");
-          print("realIndex = $realIndex");
-
           homecontroller.getColorFromImage(
               "https://image.tmdb.org/t/p/w400/${items[(index == 0) ? 19 : index - 1].backdropPath}");
           return Stack(children: [

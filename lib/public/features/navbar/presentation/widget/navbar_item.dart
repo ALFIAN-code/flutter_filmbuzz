@@ -1,6 +1,5 @@
 import 'package:filmbuzz/public/features/navbar/presentation/get/navbar_controller.dart';
 import 'package:filmbuzz/public/style.dart';
-import 'package:filmbuzz/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -25,6 +24,7 @@ class NavbarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
+          print('PAGE : ${controller.selectedIndex}');
           controller.onItemTapped(index);
         },
         child: Obx(

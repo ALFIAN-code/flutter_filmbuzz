@@ -33,15 +33,18 @@ dependencies:
   connectivity_plus: ^6.0.3
   cupertino_icons: ^1.0.6
   dio: ^5.4.3+1
+  fancy_shimmer_image: ^2.0.3
   flutter:
     sdk: flutter
   flutter_floating_bottom_bar: ^1.2.0
+  flutter_lazy_indexed_stack: ^0.0.6
   flutter_svg: ^2.0.10+1
   get: ^4.6.6
   google_fonts: ^6.2.1
   http: ^1.2.1
   internet_connection_checker_plus: ^2.3.0
   lottie: ^3.1.2
+  number_pagination: ^1.0.6
   palette_generator: ^0.3.3+3
 
 dev_dependencies:

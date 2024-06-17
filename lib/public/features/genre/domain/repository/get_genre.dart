@@ -1,4 +1,3 @@
-
 import 'package:filmbuzz/public/features/genre/data/datasource/genre_data.dart';
 
 class GetGenre {

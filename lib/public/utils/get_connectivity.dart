@@ -18,7 +18,9 @@ class NetworkController extends GetxController {
   }
 
   void _listenConnectivity() {
-    Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
+    Connectivity()
+        .onConnectivityChanged
+        .listen((List<ConnectivityResult> result) {
       isConnected.value = result.contains(ConnectivityResult.wifi) ||
           result.contains(ConnectivityResult.mobile);
     });

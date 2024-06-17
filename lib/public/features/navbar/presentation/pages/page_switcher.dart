@@ -5,23 +5,23 @@ import 'package:filmbuzz/features/watchlist/presentation/pages/watchlist_page.da
 import 'package:filmbuzz/public/features/navbar/presentation/get/navbar_controller.dart';
 import 'package:filmbuzz/public/features/navbar/presentation/pages/navbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_lazy_indexed_stack/flutter_lazy_indexed_stack.dart';
 import 'package:get/get.dart';
 
 class PageSwitcher extends StatelessWidget {
   PageSwitcher({super.key});
-  NavbarController controller = Get.put(NavbarController());
+  late var controller = Get.put(NavbarController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          Obx(() => IndexedStack(
+          Obx(() => LazyIndexedStack(
                 index: controller.selectedIndex.value,
                 children: [
                   HomePage(),
-                  const DiscoverPage(),
+                  DiscoverPage(),
                   const WatchlistPage(),
                   const SettingPage()
                 ],
