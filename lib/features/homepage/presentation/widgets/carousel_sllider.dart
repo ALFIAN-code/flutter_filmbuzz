@@ -113,7 +113,7 @@ class MyCarouserlSlider extends StatelessWidget {
               child: InkWell(
                 splashColor:
                     Theme.of(context).colorScheme.secondary.withOpacity(.4),
-                onTap: () {},
+                onTap:onTap,
               ),
             )
           ]);

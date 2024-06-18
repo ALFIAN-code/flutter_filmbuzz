@@ -15,11 +15,16 @@ class DetailController {
   var similarMovieData = Rx<MovieModel>(MovieModel());
 
   final _getDetailMovie = GetDetail(DetailMovieImplement(DetailsRemoteData()));
-  final _getSimilarMovie = GetSimilarMovie(SimilarMovieImplement(SimilarRemoteData()));
+  final _getSimilarMovie =
+      GetSimilarMovie(SimilarMovieImplement(SimilarRemoteData()));
+
+  bool isLoading = true;
 
   Future<void> fetchDetailMovie(int id) async {
-      final MovieDetailsModel movie = await _getDetailMovie.get(id);
-      movieDetailsData.value = movie;
+    isLoading = true;
+    final MovieDetailsModel movie = await _getDetailMovie.get(id);
+    movieDetailsData.value = movie;
+    isLoading = false;
   }
 
   Future<void> fetchSimilarMovie(int id) async {
