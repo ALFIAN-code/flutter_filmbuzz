@@ -4,6 +4,7 @@ import 'package:filmbuzz/features/homepage/presentation/widgets/carousel_sllider
 import 'package:filmbuzz/public/widget/display_movie.dart';
 import 'package:filmbuzz/public/widget/search.dart';
 import 'package:filmbuzz/public/style.dart';
+import 'package:filmbuzz/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/svg.dart';
@@ -92,11 +93,11 @@ class HomePage extends StatelessWidget {
                 init: controller,
                 initState: (state) => getMovie(),
                 builder: (_) {
-                  return (controller.nowPlayingMovie.isEmpty ||
-                          controller.popularMovie.isEmpty ||
-                          controller.topRatedMovie.isEmpty ||
-                          controller.trending.isEmpty ||
-                          controller.upcomingMovie.isEmpty)
+                  return (controller.nowPlayingMovie.value.listMovie == null ||
+                          controller.popularMovie.value.listMovie == null ||
+                          controller.topRatedMovie.value.listMovie == null ||
+                          controller.trending.value.listMovie == null ||
+                          controller.upcomingMovie.value.listMovie == null)
                       ? const Padding(
                           padding: EdgeInsets.symmetric(vertical: 200),
                           child: Center(child: CircularProgressIndicator()),
@@ -109,7 +110,7 @@ class HomePage extends StatelessWidget {
                             ),
                             HorintalPadding(
                                 child: Text(
-                              'Popular',
+                              'Tranding',
                               style: textStyle18Bold,
                             )),
                             const SizedBox(
@@ -117,7 +118,7 @@ class HomePage extends StatelessWidget {
                             ),
                             MyCarouserlSlider(
                               homecontroller: controller,
-                              items: controller.trending,
+                              items: controller.trending.value.listMovie!,
                             ),
                             const SizedBox(
                               height: 30,
@@ -133,23 +134,31 @@ class HomePage extends StatelessWidget {
                                       "Now Playing",
                                       style: textStyle18Bold,
                                     ),
-                                    Text(
-                                      "see all",
-                                      style: textStyle10Regular.copyWith(
-                                          color: Colors.white.withOpacity(0.6),
-                                          decoration: TextDecoration.underline),
-                                    ),
+                                    TextButton(
+                                      onPressed: () => Get.toNamed(
+                                          Routes.SEE_ALL,
+                                          arguments: [
+                                            'Now Playing',
+                                            controller.nowPlayingMovie.value
+                                          ]),
+                                      child: Text(
+                                        "see all",
+                                        style: textStyle10Regular.copyWith(
+                                            color:
+                                                Colors.white.withOpacity(0.6),
+                                            decoration:
+                                                TextDecoration.underline),
+                                      ),
+                                    )
                                   ],
                                 ),
                                 const SizedBox(
-                                  height: 20,
+                                  height: 10,
                                 ),
-                                SizedBox(
-                                  height: 790,
-                                  child: DisplayMovie(
-                                    itemCount: 6,
-                                    items: controller.nowPlayingMovie,
-                                  ),
+                                DisplayMovie(
+                                  itemCount: 6,
+                                  items: controller
+                                      .nowPlayingMovie.value.listMovie!,
                                 ),
 
                                 //======== TOP RATED ========
@@ -164,23 +173,31 @@ class HomePage extends StatelessWidget {
                                       "Top Rated",
                                       style: textStyle18Bold,
                                     ),
-                                    Text(
-                                      "see all",
-                                      style: textStyle10Regular.copyWith(
-                                          color: Colors.white.withOpacity(0.6),
-                                          decoration: TextDecoration.underline),
+                                    TextButton(
+                                      onPressed: () => Get.toNamed(
+                                          Routes.SEE_ALL,
+                                          arguments: [
+                                            'Top Rated',
+                                            controller.topRatedMovie.value
+                                          ]),
+                                      child: Text(
+                                        "see all",
+                                        style: textStyle10Regular.copyWith(
+                                            color:
+                                                Colors.white.withOpacity(0.6),
+                                            decoration:
+                                                TextDecoration.underline),
+                                      ),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(
-                                  height: 20,
+                                  height: 10,
                                 ),
-                                SizedBox(
-                                  height: 790,
-                                  child: DisplayMovie(
-                                    itemCount: 6,
-                                    items: controller.topRatedMovie,
-                                  ),
+                                DisplayMovie(
+                                  itemCount: 6,
+                                  items:
+                                      controller.topRatedMovie.value.listMovie!,
                                 ),
 
                                 //========  POPULAR ========
@@ -195,23 +212,31 @@ class HomePage extends StatelessWidget {
                                       "Popular",
                                       style: textStyle18Bold,
                                     ),
-                                    Text(
-                                      "see all",
-                                      style: textStyle10Regular.copyWith(
-                                          color: Colors.white.withOpacity(0.6),
-                                          decoration: TextDecoration.underline),
+                                    TextButton(
+                                      onPressed: () => Get.toNamed(
+                                          Routes.SEE_ALL,
+                                          arguments: [
+                                            'Popular',
+                                            controller.popularMovie.value
+                                          ]),
+                                      child: Text(
+                                        "see all",
+                                        style: textStyle10Regular.copyWith(
+                                            color:
+                                                Colors.white.withOpacity(0.6),
+                                            decoration:
+                                                TextDecoration.underline),
+                                      ),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(
-                                  height: 20,
+                                  height: 10,
                                 ),
-                                SizedBox(
-                                  height: 790,
-                                  child: DisplayMovie(
-                                    itemCount: 6,
-                                    items: controller.popularMovie,
-                                  ),
+                                DisplayMovie(
+                                  itemCount: 6,
+                                  items:
+                                      controller.popularMovie.value.listMovie!,
                                 ),
 
                                 //========  UPCOMING ========
@@ -226,23 +251,31 @@ class HomePage extends StatelessWidget {
                                       "Upcoming",
                                       style: textStyle18Bold,
                                     ),
-                                    Text(
-                                      "see all",
-                                      style: textStyle10Regular.copyWith(
-                                          color: Colors.white.withOpacity(0.6),
-                                          decoration: TextDecoration.underline),
+                                    TextButton(
+                                      onPressed: () => Get.toNamed(
+                                          Routes.SEE_ALL,
+                                          arguments: [
+                                            'Upcoming',
+                                            controller.upcomingMovie.value
+                                          ]),
+                                      child: Text(
+                                        "see all",
+                                        style: textStyle10Regular.copyWith(
+                                            color:
+                                                Colors.white.withOpacity(0.6),
+                                            decoration:
+                                                TextDecoration.underline),
+                                      ),
                                     ),
                                   ],
                                 ),
                                 const SizedBox(
-                                  height: 20,
+                                  height: 10,
                                 ),
-                                SizedBox(
-                                  height: 790,
-                                  child: DisplayMovie(
-                                    itemCount: 6,
-                                    items: controller.upcomingMovie,
-                                  ),
+                                DisplayMovie(
+                                  itemCount: 6,
+                                  items:
+                                      controller.upcomingMovie.value.listMovie!,
                                 ),
                               ],
                             )),

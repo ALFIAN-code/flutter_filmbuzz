@@ -1,5 +1,5 @@
 import 'package:filmbuzz/features/discover/presentation/getx/discover_controller.dart';
-import 'package:filmbuzz/features/discover/presentation/widgets/pagination.dart';
+import 'package:filmbuzz/public/widget/pagination.dart';
 
 import 'package:filmbuzz/public/style.dart';
 import 'package:filmbuzz/public/widget/display_movie.dart';
@@ -96,12 +96,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
                   if (controller.discoverMovie.isNotEmpty) {
                     return Column(
                       children: [
-                        SizedBox(
-                          height: 2698,
-                          child: DisplayMovie(
-                              items: controller.discoverMovie,
-                              itemCount: controller.discoverMovie.length),
-                        ),
+                        DisplayMovie(
+                            items: controller.discoverMovie,
+                            itemCount: controller.discoverMovie.length),
                         CustomPagination(
                             onNext: () {
                               controller.page.value++;

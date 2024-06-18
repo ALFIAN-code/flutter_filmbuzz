@@ -21,7 +21,7 @@ class PageSwitcher extends StatelessWidget {
                 index: controller.selectedIndex.value,
                 children: [
                   HomePage(),
-                  DiscoverPage(),
+                  const DiscoverPage(),
                   const WatchlistPage(),
                   const SettingPage()
                 ],

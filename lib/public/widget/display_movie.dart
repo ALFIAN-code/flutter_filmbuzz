@@ -15,6 +15,7 @@ class DisplayMovie extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       itemCount: itemCount,
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
