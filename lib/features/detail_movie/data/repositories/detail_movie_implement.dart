@@ -5,9 +5,9 @@ import 'package:filmbuzz/features/detail_movie/data/models/detail_movie_model.da
 import 'package:filmbuzz/features/detail_movie/domain/repositories/detail_movie_repo.dart';
 
 class DetailMovieImplement implements DetailMovieRepo {
-  DetailsRemoteData remoteData;
-
   DetailMovieImplement(this.remoteData);
+
+  final DetailsRemoteData remoteData;
 
   @override
   Future<MovieDetailsModel> getMovieById(int id) async {

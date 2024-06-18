@@ -21,7 +21,6 @@ class HomeController extends GetxController {
   Rx<MovieModel> topRatedMovie = Rx<MovieModel>(MovieModel());
   Rx<MovieModel> upcomingMovie = Rx<MovieModel>(MovieModel());
   Rx<MovieModel> nowPlayingMovie = Rx<MovieModel>(MovieModel());
-  // var isLoading = false.obs;
 
   RxInt activeSlideIndex = 0.obs;
   var currentSliderColor = Colors.transparent.obs;
@@ -37,52 +36,27 @@ class HomeController extends GetxController {
   }
 
   Future<void> fetchTrending() async {
-    // isLoading(true);
-    try {
       final MovieModel movie = await _getMovie.getTrending();
       trending.value = movie;
-    } finally {
-      // isLoading(false);
-    }
   }
 
   Future<void> fetchPopularMovie(int page) async {
-    // isLoading(true);
-    try {
       final movie = await _getMovie.getPopular(page.toString());
       popularMovie.value = movie;
-    } finally {
-      // isLoading(false);
-    }
   }
 
   Future<void> fetchTopRatedMovie(int page) async {
-    // isLoading(true);
-    try {
       final movie = await _getMovie.getTopRated(page.toString());
       topRatedMovie.value = movie;
-    } finally {
-      // isLoading(false);
-    }
   }
 
   Future<void> fetchNowPlayingMovie(int page) async {
-    // isLoading(true);
-    try {
       final movie = await _getMovie.getNowPlaying(page.toString());
       nowPlayingMovie.value = movie;
-    } finally {
-      // isLoading(false);
-    }
   }
 
   Future<void> fetchUpcomingMovie(int page) async {
-    // isLoading(true);
-    try {
       final movie = await _getMovie.getUpcoming(page.toString());
       upcomingMovie.value = movie;
-    } finally {
-      // isLoading(false);
-    }
   }
 }
