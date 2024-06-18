@@ -1,7 +1,9 @@
 // import 'package:filmbuzz/public/features/genre/domain/repository/get_genre.dart';
 // import 'package:filmbuzz/public/style.dart';
 import 'package:filmbuzz/public/widget/preview_movie.dart';
+import 'package:filmbuzz/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../model/movie_model.dart';
 
@@ -23,8 +25,12 @@ class DisplayMovie extends StatelessWidget {
           crossAxisCount: 2,
           mainAxisSpacing: 20,
           crossAxisSpacing: 10),
-      itemBuilder: (context, index) =>
-          DisplayMovieItem(movieData: items[index]),
+      itemBuilder: (context, index) => DisplayMovieItem(
+        movieData: items[index],
+        onTap: () {
+          Get.toNamed(Routes.MOVIE_DETAILS, arguments: items[index].id);
+        },
+      ),
     );
   }
 }

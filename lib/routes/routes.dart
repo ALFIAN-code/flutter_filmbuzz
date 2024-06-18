@@ -11,7 +11,7 @@ class AppPages {
   static final pages = [
     GetPage(name: Routes.HOME, page: () => HomePage()),
     GetPage(name: Routes.SEE_ALL, page: () => SeeAll()),
-    GetPage(name: Routes.MOVIE_DETAILS, page: () => const Details()),
+    GetPage(name: Routes.MOVIE_DETAILS, page: () => Details()),
     GetPage(name: Routes.WATCHLIST, page: () => const WatchlistPage()),
     GetPage(name: Routes.DISCOVER, page: () => const DiscoverPage()),
     GetPage(name: Routes.SETTINGS, page: () => const SettingPage()),

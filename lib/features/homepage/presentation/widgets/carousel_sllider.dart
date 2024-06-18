@@ -9,10 +9,14 @@ import '../get/home_controller.dart';
 
 class MyCarouserlSlider extends StatelessWidget {
   MyCarouserlSlider(
-      {super.key, required this.items, required this.homecontroller});
+      {super.key,
+      required this.items,
+      required this.homecontroller,
+      this.onTap});
 
   final List<ListMovie> items;
   HomeController homecontroller;
+  void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -101,6 +105,16 @@ class MyCarouserlSlider extends StatelessWidget {
                           ],
                         ))
                   ]),
+            ),
+            Material(
+              borderRadius: BorderRadius.circular(10),
+              clipBehavior: Clip.hardEdge,
+              color: Colors.transparent,
+              child: InkWell(
+                splashColor:
+                    Theme.of(context).colorScheme.secondary.withOpacity(.4),
+                onTap: () {},
+              ),
             )
           ]);
         },

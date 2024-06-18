@@ -8,8 +8,10 @@ class DisplayMovieItem extends StatelessWidget {
   const DisplayMovieItem({
     super.key,
     required this.movieData,
+    this.onTap,
   });
   final ListMovie movieData;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +90,14 @@ class DisplayMovieItem extends StatelessWidget {
               ],
             ),
           ),
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              splashColor:
+                  Theme.of(context).colorScheme.secondary.withOpacity(.4),
+              onTap:onTap,
+            ),
+          )
         ],
       ),
     );

@@ -1,93 +1,105 @@
-import 'package:filmbuzz/features/detail_movie/domain/entities/detail_movie.dart';
+class MovieDetailsModel {
+  int? page;
+  List<Results>? results;
+  int? totalPages;
+  int? totalResults;
 
-import '../../../../public/features/genre/data/model/genre.dart';
-import '../../domain/entities/spoken_language.dart';
-
-class MovieDetailsModel extends MovieDetails {
   MovieDetailsModel(
-      {super.adult,
-      super.backdropPath,
-      super.belongsToCollection,
-      super.budget,
-      super.genres,
-      super.homepage,
-      super.id,
-      super.imdbId,
-      super.originCountry,
-      super.originalLanguage,
-      super.originalTitle,
-      super.overview,
-      super.popularity,
-      super.posterPath,
-      super.releaseDate,
-      super.revenue,
-      super.runtime,
-      super.spokenLanguages,
-      super.status,
-      super.tagline,
-      super.title,
-      super.video,
-      super.voteAverage,
-      super.voteCount});
+      {
+      this.page,
+      this.results,
+      this.totalPages,
+      this.totalResults});
 
   MovieDetailsModel.fromJson(Map<String, dynamic> json) {
-    adult = json['adult'];
-    backdropPath = json['backdrop_path'];
-    belongsToCollection = json['belongs_to_collection'] != null
-        ? BelongsToCollectionModel.fromJson(json['belongs_to_collection'])
-        : null;
-    budget = json['budget'];
-    if (json['genres'] != null) {
-      genres = <Genres>[];
-      json['genres'].forEach((v) {
-        genres!.add(Genres.fromJson(v));
+    page = json['page'];
+    if (json['results'] != null) {
+      results = <Results>[];
+      json['results'].forEach((v) {
+        results!.add(Results.fromJson(v));
       });
     }
-    homepage = json['homepage'];
+    totalPages = json['total_pages'];
+    totalResults = json['total_results'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['page'] = page;
+    if (results != null) {
+      data['results'] = results!.map((v) => v.toJson()).toList();
+    }
+    data['total_pages'] = totalPages;
+    data['total_results'] = totalResults;
+    return data;
+  }
+}
+
+class Results {
+  bool? adult;
+  String? backdropPath;
+  List<int>? genreIds;
+  int? id;
+  String? originalLanguage;
+  String? originalTitle;
+  String? overview;
+  double? popularity;
+  String? posterPath;
+  String? releaseDate;
+  String? title;
+  bool? video;
+  double? voteAverage;
+  int? voteCount;
+
+  Results(
+      {this.adult,
+      this.backdropPath,
+      this.genreIds,
+      this.id,
+      this.originalLanguage,
+      this.originalTitle,
+      this.overview,
+      this.popularity,
+      this.posterPath,
+      this.releaseDate,
+      this.title,
+      this.video,
+      this.voteAverage,
+      this.voteCount});
+
+  Results.fromJson(Map<String, dynamic> json) {
+    adult = json['adult'];
+    backdropPath = json['backdrop_path'];
+    genreIds = json['genre_ids'].cast<int>();
     id = json['id'];
-    imdbId = json['imdb_id'];
-    originCountry = json['origin_country'].cast<String>();
     originalLanguage = json['original_language'];
     originalTitle = json['original_title'];
     overview = json['overview'];
     popularity = json['popularity'];
     posterPath = json['poster_path'];
-
     releaseDate = json['release_date'];
-    revenue = json['revenue'];
-    runtime = json['runtime'];
-    if (json['spoken_languages'] != null) {
-      spokenLanguages = <SpokenLanguagesModel>[];
-      json['spoken_languages'].forEach((v) {
-        spokenLanguages!.add(SpokenLanguagesModel.fromJson(v));
-      });
-    }
-    status = json['status'];
-    tagline = json['tagline'];
     title = json['title'];
     video = json['video'];
     voteAverage = json['vote_average'];
     voteCount = json['vote_count'];
   }
-}
 
-class BelongsToCollectionModel extends BelongsToCollection {
-  BelongsToCollectionModel(
-      {super.id, super.name, super.posterPath, super.backdropPath});
-
-  BelongsToCollectionModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    posterPath = json['poster_path'];
-    backdropPath = json['backdrop_path'];
-  }
-}
-
-class SpokenLanguagesModel extends SpokenLanguages {
-  SpokenLanguagesModel({super.englishName, super.iso6391, super.name});
-  SpokenLanguagesModel.fromJson(Map<String, dynamic> json) {
-    englishName = json['english_name'];
-    iso6391 = json['iso_639_1'];
-    name = json['name'];
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['adult'] = adult;
+    data['backdrop_path'] = backdropPath;
+    data['genre_ids'] = genreIds;
+    data['id'] = id;
+    data['original_language'] = originalLanguage;
+    data['original_title'] = originalTitle;
+    data['overview'] = overview;
+    data['popularity'] = popularity;
+    data['poster_path'] = posterPath;
+    data['release_date'] = releaseDate;
+    data['title'] = title;
+    data['video'] = video;
+    data['vote_average'] = voteAverage;
+    data['vote_count'] = voteCount;
+    return data;
   }
 }
