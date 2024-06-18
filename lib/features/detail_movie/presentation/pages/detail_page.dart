@@ -26,7 +26,7 @@ class _DetailsState extends State<Details> {
         appBar: AppBar(),
         body: Obx(
           () => (detailController.movieDetailsData.value.title == null)
-              ? const CircularProgressIndicator()
+              ? const Center(child: CircularProgressIndicator())
               : Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

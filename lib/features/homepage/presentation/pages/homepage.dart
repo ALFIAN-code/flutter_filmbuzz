@@ -117,15 +117,6 @@ class HomePage extends StatelessWidget {
                               height: 10,
                             ),
                             MyCarouserlSlider(
-                              onTap: () {
-                                Get.toNamed(Routes.MOVIE_DETAILS,
-                                    arguments: controller
-                                        .trending
-                                        .value
-                                        .listMovie![
-                                            controller.activeSlideIndex.value]
-                                        .id);
-                              },
                               homecontroller: controller,
                               items: controller.trending.value.listMovie!,
                             ),

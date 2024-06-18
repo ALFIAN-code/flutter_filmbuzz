@@ -1,22 +1,24 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:filmbuzz/public/model/movie_model.dart';
 import 'package:filmbuzz/public/style.dart';
+import 'package:filmbuzz/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 // import 'package:get/get.dart';
 
 import '../../../../public/features/genre/domain/repository/get_genre.dart';
 import '../get/home_controller.dart';
 
 class MyCarouserlSlider extends StatelessWidget {
-  MyCarouserlSlider(
-      {super.key,
-      required this.items,
-      required this.homecontroller,
-      this.onTap});
+  MyCarouserlSlider({
+    super.key,
+    required this.items,
+    required this.homecontroller,
+  });
 
   final List<ListMovie> items;
   HomeController homecontroller;
-  void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -113,7 +115,9 @@ class MyCarouserlSlider extends StatelessWidget {
               child: InkWell(
                 splashColor:
                     Theme.of(context).colorScheme.secondary.withOpacity(.4),
-                onTap:onTap,
+                onTap: () {
+                  Get.toNamed(Routes.MOVIE_DETAILS, arguments: items[index].id);
+                },
               ),
             )
           ]);
