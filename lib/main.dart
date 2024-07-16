@@ -1,5 +1,4 @@
 // import 'package:filmbuzz/features/homepage/presentation/pages/homepage.dart';
-import 'package:filmbuzz/features/homepage/presentation/pages/homepage.dart';
 import 'package:filmbuzz/public/features/navbar/presentation/pages/page_switcher.dart';
 import 'package:filmbuzz/public/style.dart';
 // import 'package:filmbuzz/features/splash/presentation/page/splash.dart';
