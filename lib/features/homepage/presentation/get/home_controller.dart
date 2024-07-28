@@ -10,11 +10,6 @@ import 'package:palette_generator/palette_generator.dart';
 
 class HomeController extends GetxController {
   HomeController();
-  // var trending = <MovieModel>[].obs;
-  // var popularMovie = <MovieModel>[].obs;
-  // var topRatedMovie = <MovieModel>[].obs;
-  // var upcomingMovie = <MovieModel>[].obs;
-  // var nowPlayingMovie = <MovieModel>[].obs;
 
   Rx<MovieModel> trending = Rx<MovieModel>(MovieModel());
   Rx<MovieModel> popularMovie = Rx<MovieModel>(MovieModel());

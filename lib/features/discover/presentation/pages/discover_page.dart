@@ -4,7 +4,6 @@ import 'package:filmbuzz/public/widget/pagination.dart';
 import 'package:filmbuzz/public/style.dart';
 import 'package:filmbuzz/public/widget/display_movie.dart';
 import 'package:filmbuzz/public/widget/search.dart';
-import 'package:filmbuzz/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
