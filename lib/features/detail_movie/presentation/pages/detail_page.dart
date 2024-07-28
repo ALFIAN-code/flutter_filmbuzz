@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:filmbuzz/features/detail_movie/presentation/getx/detail_movie.dart';
 import 'package:filmbuzz/features/detail_movie/presentation/widget/info_phil.dart';
@@ -28,6 +29,8 @@ class _DetailsState extends State<Details> {
   void initState() {
     super.initState();
     detailController.fetchDetailMovie(movieID);
+    detailController.fetchVideos(movieID);
+    detailController.fetchSimilarMovie(movieID);
   }
 
   @override
@@ -39,7 +42,9 @@ class _DetailsState extends State<Details> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Obx(
         () {
-          if (detailController.movieDetailsData.value.posterPath == null) {
+          if (detailController.movieDetailsData.value.posterPath == null ||
+              detailController.videoMovie.value.results == null ||
+              detailController.similarMovieData.value.listMovie == null) {
             return const Center(child: CircularProgressIndicator());
           }
           return Stack(
@@ -111,20 +116,20 @@ class _DetailsState extends State<Details> {
 
                     //content
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'About movie',
-                            style: textStyle18Semibold,
+                            style: textStyle20Semibold,
                           ),
                           const SizedBox(
                             height: 10,
                           ),
                           Text(
                             detailController.movieDetailsData.value.overview!,
-                            style: textStyle12Regular,
+                            style: textStyle14Regular,
                           ),
                           const SizedBox(
                             height: 10,
@@ -137,21 +142,24 @@ class _DetailsState extends State<Details> {
                                 children: [
                                   Text(
                                     'Status ',
-                                    style: textStyle12Regular,
+                                    style: textStyle14Regular,
                                   ),
                                   Text(
                                     'Spoken Language ',
-                                    style: textStyle12Regular,
+                                    style: textStyle14Regular,
                                   ),
                                   Text(
                                     'Budget ',
-                                    style: textStyle12Regular,
+                                    style: textStyle14Regular,
                                   ),
                                   Text(
                                     'Income ',
-                                    style: textStyle12Regular,
+                                    style: textStyle14Regular,
                                   ),
-                                  Text('Origin', style: textStyle12Regular,)
+                                  Text(
+                                    'Origin',
+                                    style: textStyle14Regular,
+                                  )
                                 ],
                               ),
                               Column(
@@ -160,19 +168,19 @@ class _DetailsState extends State<Details> {
                                 children: [
                                   Text(
                                     ': ${detailController.movieDetailsData.value.status}',
-                                    style: textStyle12Regular,
+                                    style: textStyle14Regular,
                                   ),
                                   Text(
                                     ': ${detailController.movieDetailsData.value.spokenLanguages!.map((e) => e.englishName).join(', ')}',
-                                    style: textStyle12Regular,
+                                    style: textStyle14Regular,
                                   ),
                                   Text(
                                     ': ${NumberFormat.compactCurrency(symbol: 'USD ').format(detailController.movieDetailsData.value.budget)}',
-                                    style: textStyle12Regular,
+                                    style: textStyle14Regular,
                                   ),
                                   Text(
                                     ': ${NumberFormat.compactCurrency(symbol: 'USD ').format(detailController.movieDetailsData.value.revenue)}',
-                                    style: textStyle12Regular,
+                                    style: textStyle14Regular,
                                   ),
                                   Text(
                                     ': ${detailController.movieDetailsData.value.originCountry!.map(
@@ -181,12 +189,49 @@ class _DetailsState extends State<Details> {
                                         return Country.tryParse(e)?.name;
                                       },
                                     ).join(", ")}',
-                                    style: textStyle12Regular,
+                                    style: textStyle14Regular,
                                   ),
                                 ],
                               ),
                             ],
                           ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Text(
+                            'Trailer',
+                            style: textStyle20Semibold,
+                          ),
+                          const SizedBox(
+                            height:20,
+                          ),
+                          CarouselSlider(
+                            options: CarouselOptions(
+                                autoPlay: false,
+                                aspectRatio: 19/9,
+                                initialPage: 0,
+                                height: 196,
+                                enlargeCenterPage: true,
+                                enableInfiniteScroll: false),
+                            items: detailController.videoMovie.value.results!
+                                .where((item) {
+                              return item.type == 'Trailer' ||
+                                  item.type == 'Teaser';
+                            }).map((item) {
+                              return Container(
+                                // height: 196,
+                                // width: 351,
+                                margin: const EdgeInsets.only(left: 10),
+                                color: Colors.grey,
+                                child: Center(
+                                  child: Text(item.name ?? "null"),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                          const SizedBox(
+                            height: 50,
+                          )
                         ],
                       ),
                     )
