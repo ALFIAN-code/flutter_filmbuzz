@@ -17,7 +17,9 @@ class DetailController {
 
   var movieDetailsData = Rx<MovieDetailsModel>(MovieDetailsModel());
   var similarMovieData = Rx<MovieModel>(MovieModel());
-  var videoMovie = Rx<VideoModel>(VideoModel());
+  var videoMovie = <Results>[].obs;
+
+  var videoMovieFiltered = <Results>[].obs;
 
   final _getDetailMovie = GetDetail(DetailMovieImplement(DetailsRemoteData()));
   final _getSimilarMovie =
@@ -26,6 +28,8 @@ class DetailController {
   final _getVideo = GetVideo(VideoMovieImplement(VideoRemoteData()));
 
   bool isLoading = true;
+
+  var lastVideoSlide = ''.obs;
 
   Future<void> fetchDetailMovie(int id) async {
     isLoading = true;
@@ -41,6 +45,10 @@ class DetailController {
 
   Future<void> fetchVideos(int id) async {
     final VideoModel video = await _getVideo.get(id);
-    videoMovie.value = video;
+
+    videoMovieFiltered.value = video.results!.where((item) {
+      return item.type == 'Trailer' || item.type == 'Teaser';
+    }).toList();
+    videoMovie.value = video.results!;
   }
 }

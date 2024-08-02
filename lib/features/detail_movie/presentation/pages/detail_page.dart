@@ -12,6 +12,7 @@ import 'package:get/get.dart';
 import 'package:country_picker/country_picker.dart';
 
 import 'package:intl/intl.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class Details extends StatefulWidget {
   Details({super.key});
@@ -24,6 +25,7 @@ class _DetailsState extends State<Details> {
   final DetailController detailController = Get.put(DetailController());
 
   final movieID = Get.arguments;
+ 
 
   @override
   void initState() {
@@ -38,12 +40,17 @@ class _DetailsState extends State<Details> {
     var deviceHeight = MediaQuery.of(context).size.height;
     print(movieID);
 
+    // var filteredVideo =
+    //     detailController.videoMovie.value.where((item) {
+    //   return item.type == 'Trailer' || item.type == 'Teaser';
+    // }).toList();
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Obx(
         () {
           if (detailController.movieDetailsData.value.posterPath == null ||
-              detailController.videoMovie.value.results == null ||
+              detailController.videoMovie.isEmpty ||
               detailController.similarMovieData.value.listMovie == null) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -203,31 +210,47 @@ class _DetailsState extends State<Details> {
                             style: textStyle20Semibold,
                           ),
                           const SizedBox(
-                            height:20,
+                            height: 20,
                           ),
-                          CarouselSlider(
+                          CarouselSlider.builder(
+                            itemCount: detailController.videoMovieFiltered.length,
                             options: CarouselOptions(
                                 autoPlay: false,
-                                aspectRatio: 19/9,
+                                aspectRatio: 1.0,
                                 initialPage: 0,
-                                height: 196,
+                                animateToClosest: true,
+                                height: 220,
+                                enlargeFactor: 0.23,
                                 enlargeCenterPage: true,
                                 enableInfiniteScroll: false),
-                            items: detailController.videoMovie.value.results!
-                                .where((item) {
-                              return item.type == 'Trailer' ||
-                                  item.type == 'Teaser';
-                            }).map((item) {
-                              return Container(
-                                // height: 196,
-                                // width: 351,
-                                margin: const EdgeInsets.only(left: 10),
-                                color: Colors.grey,
-                                child: Center(
-                                  child: Text(item.name ?? "null"),
-                                ),
-                              );
-                            }).toList(),
+                            itemBuilder: (context, index, realIndex) {
+                              var isCurrentSlide = false;
+                              if (detailController.videoMovieFiltered[index].id == detailController.lastVideoSlide.value) {
+                                isCurrentSlide = true;
+                              }
+
+                              return YoutubePlayerBuilder(
+                                player: YoutubePlayer(
+                                controller: YoutubePlayerController(initialVideoId: detailController.videoMovieFiltered[index].key!),
+                              ), builder: (contex, player) {
+                                return Column(
+                                  children: [
+                                    player
+                                  ],
+                                );
+                              },);
+                              // return Container(
+                              //   height: 50,
+                              //   clipBehavior: Clip.hardEdge,
+                              //   decoration: BoxDecoration(
+                              //       borderRadius: BorderRadius.circular(15)),
+                              //   child: Image.network(
+                              //       fit: BoxFit.cover,
+                              //       YoutubePlayer.getThumbnail(
+                              //         videoId: detailController.videoMovieFiltered[index].key!,
+                              //       )),
+                              // );
+                            },
                           ),
                           const SizedBox(
                             height: 50,
