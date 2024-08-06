@@ -4,7 +4,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
 class NetworkController extends GetxController {
-  var isConnected = false.obs;
+  var isConnected = true.obs;
 
   @override
   void onInit() {

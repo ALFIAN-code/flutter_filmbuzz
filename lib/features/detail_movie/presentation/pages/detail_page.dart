@@ -25,7 +25,6 @@ class _DetailsState extends State<Details> {
   final DetailController detailController = Get.put(DetailController());
 
   final movieID = Get.arguments;
- 
 
   @override
   void initState() {
@@ -213,43 +212,78 @@ class _DetailsState extends State<Details> {
                             height: 20,
                           ),
                           CarouselSlider.builder(
-                            itemCount: detailController.videoMovieFiltered.length,
+                            itemCount:
+                                detailController.videoMovieFiltered.length,
                             options: CarouselOptions(
                                 autoPlay: false,
                                 aspectRatio: 1.0,
                                 initialPage: 0,
                                 animateToClosest: true,
                                 height: 220,
-                                enlargeFactor: 0.23,
+                                enlargeFactor: 0.17,
                                 enlargeCenterPage: true,
                                 enableInfiniteScroll: false),
                             itemBuilder: (context, index, realIndex) {
                               var isCurrentSlide = false;
-                              if (detailController.videoMovieFiltered[index].id == detailController.lastVideoSlide.value) {
+                              if (detailController
+                                      .videoMovieFiltered[index].id ==
+                                  detailController.lastVideoSlide.value) {
                                 isCurrentSlide = true;
                               }
-
-                              return YoutubePlayerBuilder(
-                                player: YoutubePlayer(
-                                controller: YoutubePlayerController(initialVideoId: detailController.videoMovieFiltered[index].key!),
-                              ), builder: (contex, player) {
-                                return Column(
+                              return Container(
+                                // height: 50,
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Stack(
                                   children: [
-                                    player
+                                    Image.network(
+                                      fit: BoxFit.cover,
+                                      YoutubePlayer.getThumbnail(
+                                        videoId: detailController
+                                            .videoMovieFiltered[index].key!,
+                                      ),
+                                      errorBuilder: (BuildContext context,
+                                          Object exception,
+                                          StackTrace? stackTrace) {
+                                        return Container(
+                                          color: Colors.grey,
+                                          child: const Center(child: Text('Can"t Load Image')));
+                                      },
+                                    ),
+                                    Container(
+                                      // height: 20,
+                                      width: double.infinity,
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 20
+                                      ),
+                                      decoration: BoxDecoration(
+                                        gradient: LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: [
+                                          Colors.black.withOpacity(0.9),
+                                          Colors.black.withOpacity(0.6),
+                                          Colors.black.withOpacity(0)
+                                        ])
+                                      ),
+                                      child: Text(detailController
+                                            .videoMovieFiltered[index].name!, 
+                                            style: textStyle14Regular,
+                                            maxLines: 2,
+                                            
+                                            ),
+                                    ),
+                                    Center(
+                                      child: Icon(
+                                      Icons.play_arrow_rounded,
+                                      color: Colors.white.withOpacity(0.8),
+                                      size: 80,
+                                      ),
+                                    )
                                   ],
-                                );
-                              },);
-                              // return Container(
-                              //   height: 50,
-                              //   clipBehavior: Clip.hardEdge,
-                              //   decoration: BoxDecoration(
-                              //       borderRadius: BorderRadius.circular(15)),
-                              //   child: Image.network(
-                              //       fit: BoxFit.cover,
-                              //       YoutubePlayer.getThumbnail(
-                              //         videoId: detailController.videoMovieFiltered[index].key!,
-                              //       )),
-                              // );
+                                ),
+                              );
                             },
                           ),
                           const SizedBox(
@@ -274,3 +308,4 @@ class _DetailsState extends State<Details> {
     );
   }
 }
+
