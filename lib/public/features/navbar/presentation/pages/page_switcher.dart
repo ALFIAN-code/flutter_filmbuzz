@@ -26,7 +26,7 @@ class PageSwitcher extends StatelessWidget {
                   const SettingPage()
                 ],
               )),
-          const Align(alignment: Alignment.bottomCenter, child: MyNavbar())
+          const SafeArea(child: Align(alignment: Alignment.bottomCenter, child: MyNavbar()))
         ],
       ),
     );

@@ -1,18 +1,18 @@
-import 'dart:ui';
-
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:filmbuzz/features/detail_movie/presentation/getx/detail_movie.dart';
 import 'package:filmbuzz/features/detail_movie/presentation/widget/info_phil.dart';
 import 'package:filmbuzz/features/detail_movie/presentation/widget/movie_image_backdrop.dart';
 import 'package:filmbuzz/features/detail_movie/presentation/widget/toolbar_top.dart';
+import 'package:filmbuzz/features/detail_movie/presentation/widget/trailer_item.dart';
 import 'package:filmbuzz/public/style.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:country_picker/country_picker.dart';
 
 import 'package:intl/intl.dart';
-import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+
+import 'video_page.dart';
 
 class Details extends StatefulWidget {
   Details({super.key});
@@ -37,13 +37,9 @@ class _DetailsState extends State<Details> {
   @override
   Widget build(BuildContext context) {
     var deviceHeight = MediaQuery.of(context).size.height;
+   var deviceWidth = MediaQuery.of(context).size.width;
+
     print(movieID);
-
-    // var filteredVideo =
-    //     detailController.videoMovie.value.where((item) {
-    //   return item.type == 'Trailer' || item.type == 'Teaser';
-    // }).toList();
-
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: Obx(
@@ -140,66 +136,91 @@ class _DetailsState extends State<Details> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Status ',
-                                    style: textStyle14Regular,
-                                  ),
-                                  Text(
-                                    'Spoken Language ',
-                                    style: textStyle14Regular,
-                                  ),
-                                  Text(
-                                    'Budget ',
-                                    style: textStyle14Regular,
-                                  ),
-                                  Text(
-                                    'Income ',
-                                    style: textStyle14Regular,
-                                  ),
-                                  Text(
-                                    'Origin',
-                                    style: textStyle14Regular,
-                                  )
-                                ],
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    ': ${detailController.movieDetailsData.value.status}',
-                                    style: textStyle14Regular,
-                                  ),
-                                  Text(
-                                    ': ${detailController.movieDetailsData.value.spokenLanguages!.map((e) => e.englishName).join(', ')}',
-                                    style: textStyle14Regular,
-                                  ),
-                                  Text(
-                                    ': ${NumberFormat.compactCurrency(symbol: 'USD ').format(detailController.movieDetailsData.value.budget)}',
-                                    style: textStyle14Regular,
-                                  ),
-                                  Text(
-                                    ': ${NumberFormat.compactCurrency(symbol: 'USD ').format(detailController.movieDetailsData.value.revenue)}',
-                                    style: textStyle14Regular,
-                                  ),
-                                  Text(
-                                    ': ${detailController.movieDetailsData.value.originCountry!.map(
-                                      (e) {
-                                        print(e);
-                                        return Country.tryParse(e)?.name;
-                                      },
-                                    ).join(", ")}',
-                                    style: textStyle14Regular,
-                                  ),
-                                ],
-                              ),
-                            ],
+                          SizedBox(
+                            width: deviceWidth - 40,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Status ',
+                                      style: textStyle14Regular,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      'Spoken Language ',
+                                      style: textStyle14Regular,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      'Budget ',
+                                      style: textStyle14Regular,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      'Income ',
+                                      style: textStyle14Regular,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      'Origin',
+                                      style: textStyle14Regular,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      ': ${detailController.movieDetailsData.value.status}',
+                                      style: textStyle14Regular,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      ': ${detailController.movieDetailsData.value.spokenLanguages!.map((e) => e.englishName).join(', ')}',
+                                      style: textStyle14Regular,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      ': ${NumberFormat.compactCurrency(symbol: 'USD ').format(detailController.movieDetailsData.value.budget)}',
+                                      style: textStyle14Regular,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      ': ${NumberFormat.compactCurrency(symbol: 'USD ').format(detailController.movieDetailsData.value.revenue)}',
+                                      style: textStyle14Regular,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    Text(
+                                      ': ${detailController.movieDetailsData.value.originCountry!.map(
+                                        (e) {
+                                          print(e);
+                                          return Country.tryParse(e)?.name;
+                                        },
+                                      ).join(", ")}',
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: textStyle14Regular,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 30,
@@ -224,66 +245,14 @@ class _DetailsState extends State<Details> {
                                 enlargeCenterPage: true,
                                 enableInfiniteScroll: false),
                             itemBuilder: (context, index, realIndex) {
-                              var isCurrentSlide = false;
-                              if (detailController
-                                      .videoMovieFiltered[index].id ==
-                                  detailController.lastVideoSlide.value) {
-                                isCurrentSlide = true;
-                              }
-                              return Container(
-                                // height: 50,
-                                clipBehavior: Clip.hardEdge,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15)),
-                                child: Stack(
-                                  children: [
-                                    Image.network(
-                                      fit: BoxFit.cover,
-                                      YoutubePlayer.getThumbnail(
-                                        videoId: detailController
-                                            .videoMovieFiltered[index].key!,
-                                      ),
-                                      errorBuilder: (BuildContext context,
-                                          Object exception,
-                                          StackTrace? stackTrace) {
-                                        return Container(
-                                          color: Colors.grey,
-                                          child: const Center(child: Text('Can"t Load Image')));
-                                      },
-                                    ),
-                                    Container(
-                                      // height: 20,
-                                      width: double.infinity,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 20
-                                      ),
-                                      decoration: BoxDecoration(
-                                        gradient: LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          colors: [
-                                          Colors.black.withOpacity(0.9),
-                                          Colors.black.withOpacity(0.6),
-                                          Colors.black.withOpacity(0)
-                                        ])
-                                      ),
-                                      child: Text(detailController
-                                            .videoMovieFiltered[index].name!, 
-                                            style: textStyle14Regular,
-                                            maxLines: 2,
-                                            
-                                            ),
-                                    ),
-                                    Center(
-                                      child: Icon(
-                                      Icons.play_arrow_rounded,
-                                      color: Colors.white.withOpacity(0.8),
-                                      size: 80,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
+                              return GestureDetector(
+                                onTap: () {
+                                  print('tapped');
+                                  Get.to(() => VideoPlayer(
+                                    youtubeKey: detailController
+                                        .videoMovieFiltered[index].key!));
+                                },
+                                child: TrailerItem(detailController: detailController, index: index,));
                             },
                           ),
                           const SizedBox(
@@ -308,4 +277,5 @@ class _DetailsState extends State<Details> {
     );
   }
 }
+
 
