@@ -1,6 +1,6 @@
 # filmbuzz
 
-A new Flutter project.
+an application that displays a movie catalog from the TMDB api implementing clean architecture
 
 ## Getting Started
 
